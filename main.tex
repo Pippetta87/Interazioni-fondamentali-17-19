@@ -1,0 +1,300 @@
+\documentclass[10pt,xcolor={usenames},fleqn,mathserif,serif]{beamer}
+
+%%%Usefull link
+%tikz-equations:
+%http://www.wekaleamstudios.co.uk/posts/creating-a-presentation-with-latex-beamer-equations-and-tikz/
+
+% There are many different themes available for Beamer. A comprehensive
+% list with examples is given here:
+% http://deic.uab.es/~iblanes/beamer_gallery/index_by_theme.html
+% You can uncomment the themes below if you would like to use a different
+% one:
+%\usetheme{AnnArbor}
+%\usetheme{Antibes}
+%\usetheme{Bergen}
+%\usetheme{Berkeley}
+%\usetheme{Berlin}
+%\usetheme{Boadilla}
+%\usetheme{boxes}
+%\usetheme{CambridgeUS}
+%\usetheme{Copenhagen}
+%\usetheme{Darmstadt}
+\usetheme{default}
+%\usetheme{Frankfurt}
+%\usetheme{Goettingen}
+%\usetheme{Hannover}
+%\usetheme{Ilmenau}
+%\usetheme{JuanLesPins}
+%\usetheme{Luebeck}
+%\usetheme{Madrid}
+%\usetheme{Malmoe}
+%\usetheme{Marburg}
+%\usetheme{Montpellier}
+%\usetheme{PaloAlto}
+%\usetheme{Pittsburgh}
+%\usetheme{Rochester}
+%\usetheme{Singapore}
+%\usetheme{Szeged}
+%\usetheme{Warsaw}
+
+\hypersetup{pdfpagemode=FullScreen}
+
+\addtobeamertemplate{block begin}{%
+  \setlength{\textwidth}{0.95\textwidth}%
+  \setlength\abovedisplayskip{0pt}%
+}{}
+
+
+\setbeamertemplate{caption}{\insertcaption}
+
+%% colors
+\definecolor{bittersweet}{rgb}{1.0, 0.44, 0.37}
+\definecolor{brilliantlavender}{rgb}{0.96, 0.73, 1.0}
+\definecolor{antiquefuchsia}{rgb}{0.57, 0.36, 0.51}
+\definecolor{violetw}{rgb}{0.93, 0.51, 0.93}
+\definecolor{Veronica}{rgb}{0.63, 0.36, 0.94}
+\definecolor{atomictangerine}{rgb}{1.0, 0.6, 0.4}
+\definecolor{darkgray}{rgb}{0.66, 0.66, 0.66}
+\definecolor{brightcerulean}{rgb}{0.11, 0.67, 0.84}
+\definecolor{cadmiumorange}{rgb}{0.93, 0.53, 0.18}
+\definecolor{ochre}{rgb}{0.8, 0.47, 0.13}
+\definecolor{midnightblue}{rgb}{0.1, 0.1, 0.44}
+\definecolor{lemon}{rgb}{1.0, 0.97, 0.0}
+\definecolor{grey}{rgb}{0.7, 0.75, 0.71}
+\definecolor{amber}{rgb}{1.0, 0.75, 0.0}
+\definecolor{almond}{rgb}{0.94, 0.87, 0.8}
+\definecolor{bf}{RGB}{88, 86, 88}
+\definecolor{bb}{RGB}{177, 177, 177}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% importa pacchetti
+\usepackage{usepkg}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Funzioni generali
+\usepackage{functions}
+%http://tex.stackexchange.com/questions/246/when-should-i-use-input-vs-include
+\newcommand{\setmuskip}[2]{#1=#2\relax} %%problem usinig mu with calc (req by mathtools) loaded
+\usepackage{sources}
+%\usepackage{length}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Funzioni per questo file main
+\usepackage{mathOp}
+
+%%tikz sources
+
+%%%%
+\def\status{coazione}
+\def\keeptrying{coazione}
+\usepackage{LocalF}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\title{Interazioni fondamentali}
+
+% A subtitle is optional and this may be deleted
+\subtitle{Preparazione Maggio 18}
+
+%\author{F.~Author\inst{1} \and S.~Another\inst{2}}
+% - Give the names in the same order as the appear in the paper.
+% - Use the \inst{?} command only if the authors have different
+%   affiliation.
+
+%\institute[Universities of Somewhere and Elsewhere] % (optional, but mostly needed)
+%{
+% \inst{1}
+% Department of Computer Science\\
+%  University of Somewhere
+%  \and
+%  \inst{2}%
+%  Department of Theoretical Philosophy\\
+%  University of Elsewhere}
+% - Use the \inst command only if there are several affiliations.
+% - Keep it simple, no one is interested in your street address.
+
+\date{Appello 20 Maggio, \today}
+% - Either use conference name or its abbreviation.
+% - Not really informative to the audience, more for people (including
+%   yourself) who are reading the slides online
+
+\subject{Descrizione comportamento costituente elementari}
+% This is only inserted into the PDF information catalog. Can be left
+% out. 
+
+% If you have a file called "university-logo-filename.xxx", where xxx
+% is a graphic format that can be processed by latex or pdflatex,
+% resp., then you can add a logo as follows:
+
+% \pgfdeclareimage[height=0.5cm]{university-logo}{university-logo-filename}
+% \logo{\pgfuseimage{university-logo}}
+
+% Delete this, if you do not want the table of contents to pop up at
+% the beginning of each subsection:
+%\AtBeginPart[]
+%{
+%  \begin{frame}<beamer>{Outline}    %\tableofcontents[currentsection]
+%  \end{frame}
+%}
+
+%\AtBeginDocument{%
+%\addtolength\abovedisplayskip{-0.5\baselineskip}%
+%\addtolength\belowdisplayskip{-1\baselineskip}%
+%\addtolength\abovedisplayshortskip{-0.5\baselineskip}%
+%\addtolength\belowdisplayshortskip{-1\baselineskip}%
+%}
+
+\makeatletter
+\AtBeginPart{%
+  \addtocontents{toc}{\protect\beamer@partintoc{\the\c@part}{\beamer@partnameshort}{\the\c@page}}%
+}
+%% number, shortname, page.
+\providecommand\beamer@partintoc[3]{%
+  \ifnum\c@tocdepth=-1\relax
+    % requesting onlyparts.
+    \makebox[6em]{PART #1:} #2
+    \par
+  \fi
+}
+\define@key{beamertoc}{onlyparts}[]{%
+  \c@tocdepth=-1\relax
+}
+\makeatother%
+
+\setbeamertemplate{navigation symbols}{}
+
+\makeatletter
+\setbeamertemplate{headline}
+{
+    \leavevmode%
+    \hbox{%Refintro
+        \begin{beamercolorbox}[wd=.1\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
+            \hyperlink{lezioni}{Reg}
+        \end{beamercolorbox}%
+
+ \begin{beamercolorbox}[wd=.1\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%refs Part 1
+            \hyperlink{mainaims}{Perch\'e??}
+        \end{beamercolorbox}%
+
+ \begin{beamercolorbox}[wd=.1\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%refs Part 1
+            \hyperlink{tools}{Tools!}
+        \end{beamercolorbox}%
+        
+        \begin{beamercolorbox}[wd=.35\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+            %   \usebeamerfont{date in head/foot}\insertshortdate{}\hspace*{2em}
+            \insertframenumber{} \hspace*{2ex}  / \hspace*{2ex} \inserttotalframenumber
+            \hspace*{2ex} 
+        \end{beamercolorbox}}%
+        \vskip0pt%
+    }
+    \makeatother
+
+\AtBeginSection{\frame{\sectionpage}}
+
+% Let's get started
+\begin{document}
+
+\input{tikzdir}%%contain tikz files as filecontents
+
+
+\addtobeamertemplate{block begin}{\setlength\abovedisplayskip{2pt}\setlength\belowdisplayskip{2pt}\setlength\abovedisplayshortskip{2pt}\setlength\belowdisplayshortskip{2pt}}
+
+\addtobeamertemplate{block begin}{\vspace*{-3pt}}{}
+\addtobeamertemplate{block end}{}{\vspace*{-3pt}}
+
+
+\begin{frame}{work in progress}
+
+Choose the way!!
+
+    parte tools: QM, scattering, meccanica relativistica, decadimenti, stopping power, cinematica decadimenti e urti
+    fisica nucleare: deutone, modelli di nucleo, scattering NN, .
+    
+    Modello standard: 4 forze fondamentali,  equazione di dirac, antimateria, interazione debole, intzerazione forte quarks, particelle strane.
+    
+    Simmetria.
+    
+    Esperimenti.
+    
+\end{frame}
+
+\begin{frame}
+  \titlepage
+  \tableofcontents[onlyparts]
+
+\end{frame}
+
+% Section and subsections will appear in the presentation overview
+% and table of contents.
+%\frame{\tableofcontents[onlyparts]}
+
+
+
+%\begin{frame}{Argomenti}
+%  \tableofcontents[part=1,hideallsubsections%,pausesections
+%  ]
+%  % You might wish to add the option [pausesections]
+%\end{frame}
+
+\part{costantini/signorelli blowing}\label{lezioni}
+\frame{\partpage}
+\input{reg}
+
+\part{Come si indagano i costituenti della materia??}\label{mainaims}
+\frame{\partpage}
+\input{succo}
+
+\part{Strumenti}\label{tools}
+\frame{\partpage}
+\input{tools}
+
+\part{Interazioni fondamentali, particelle (/mediatori)}\label{tools}
+\frame{\partpage}
+\begin{frame}{this part toc}
+\begin{itemize}
+\item Scattering: Rutherford,etc
+\item Interazioni fondamentali
+\item Interazioni forti
+\item parit\'a intrinseca \Ppion
+\item Interazioni deboli
+\item Decadimenti
+\item Isospin: scattering pp, processi \Ppion-\Pnucleon
+\item Leptoni, mesoni, barioni, quarks
+\item particelle strane: sistemi K
+\item violazione parit\'a in interazioni deboli
+\item Theta-Tau puzzle
+\item Produzione adronica: ee, vector boson dominance, quarto/quinto quark, Y(9460)
+\end{itemize}
+\end{frame}
+\input{interactionsparticles}
+
+\part{Modello standard}
+\frame{\partpage}
+\begin{frame}{this part toc}
+\begin{itemize}
+\item Elettrone relativistico: rappresentazione di Bjorken-Drell
+\item Precessione spin in campo magnetico, forza di Lorentz, precessione di Thomas
+\item Antimateria
+\item Propriet\'a sistemi particelle identiche sotto scambio
+\item Livelli energetici in potenziale coulombiano: positronio, quarkonio
+\item Supersimmetria
+\item Elicit\'a
+\item Operatore parit\'a
+\item Generalizzazione principio di Pauli
+\item Diagrammi di Feynmann
+\item Simmetria CP
+\item Moto spin in campo magnetico (BMT, precessione anomala)
+\item Misura (g-2)
+\item Operatore C, G-parit\'a
+\item Simmetrie: $U(1)\times SU(2)\times SU(3)$, T. di Noether
+\item Teorema CPT (Schwinger, Luders, Pauli)
+\item Neutrini di Dirac/Majorana
+\end{itemize}
+\end{frame}
+\input{standardmodel}
+
+\part{Crucial experiments}
+\frame{\partpage}
+\begin{frame}{this part toc}
+\begin{itemize}
+\item Wu(1957)
+\end{itemize}
+\end{frame}
+\input{experimentscrucial}
+\end{document}
