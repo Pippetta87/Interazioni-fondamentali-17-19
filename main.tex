@@ -1,3 +1,7 @@
+\makeatletter
+\let\@starttocorig\@starttoc
+\makeatother%%
+
 \documentclass[10pt,xcolor={usenames},fleqn,mathserif,serif]{beamer}
 
 %%%Usefull link
@@ -22,7 +26,7 @@
 \definecolor{almond}{rgb}{0.94, 0.87, 0.8}
 \definecolor{bf}{RGB}{88, 86, 88}
 \definecolor{bb}{RGB}{177, 177, 177}
-
+\definecolor{keyword}{rgb}{0.25, 0.25, 0.28}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% importa pacchetti
 \usepackage{usepkg}
@@ -81,21 +85,16 @@ Choose the way!!
 %  % You might wish to add the option [pausesections]
 %\end{frame}
 
-\part{Intro. costantini/signorelli/Forti blowing}\label{part:lezioni}
-\frame{\partpage}
-\section{RegLez}
+\part{Intro. costantini/signorelli/Forti blowing}\linkdest{lezioni}
 \input{reg}
 
-\part{Come si indagano i costituenti della materia??}\label{mainaims}
-\frame{\partpage}
+\part{Come si indagano i costituenti della materia??}\linkdest{mainaims}
 \input{succo}
 
 \part{Strumenti}\label{tools}
-\frame{\partpage}
 \input{tools}
 
-\part{Interazioni fondamentali, particelle (/mediatori)}\label{tools}
-\frame{\partpage}
+\part{Interazioni fondamentali, particelle (/mediatori)}\linkdest{tools}
 \begin{frame}{this part toc}
 \begin{itemize}
 \item Scattering: Rutherford,etc
@@ -140,11 +139,14 @@ Choose the way!!
 \input{standardmodel}
 
 \part{Crucial experiments}
-\frame{\partpage}
 \begin{frame}{this part toc}
 \begin{itemize}
 \item Wu(1957)
 \end{itemize}
 \end{frame}
 \input{experimentscrucial}
+
+\part{List of sorted keywords}
+\listofsortedkeywords
+
 \end{document}
