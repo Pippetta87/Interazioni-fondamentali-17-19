@@ -22,32 +22,74 @@
 
 %%% COUNTERS
 \newcounter{cherrykey}%conta le keyword totali per auto ref
-\newcounter{cherrysublist}% conta le key prima di keywordlist
+\newcounter{cherrysectionlist}% conta le key prima di keywordlist
+\newcounter{todokey}%conta i todo totali per auto ref
+\newcounter{todosectionlist}% conta i todo prima di keywordlist
+\newcounter{mustkey}%conta i must totali per auto ref
+\newcounter{mustsectionlist}% conta i must prima di keywordlist
+
 \newcommand\headinginfo[1]{%
-\addcontentsline{key-\thecherrysublist}{heading}{{#1}}%
-\addtocontents{key-\thecherrysublist}{\vspace{5pt}}}
+  \addcontentsline{key-\thecherrysectionlist}{heading}{{#1}}%
+  \addtocontents{key-\thecherrysectionlist}{\vspace{5pt}}}
 %% expert approach to keywords
-\makeatletter
-\newcommand\keyword[2][target-\thecherrykey]{%
+ \makeatletter
+\newcommand\keyword[2][target-\thecherrykey]{%keyword
 \addtocounter{cherrykey}{1}
 \noindent{%
 \color{keyword}{#2}%
-}
+}%
 \phantomsection% comment out if hyperref is not used
-\linkdest{#1}
-\addcontentsline{key-\thecherrysublist}{subsubsection}{\textbullet\protect\hyperlink{#1}{#2}}
+  \linkdest{#1}%
+\addcontentsline{key-\thecherrysectionlist}{subsubsection}{\textbullet\protect\hyperlink{#1}{#2}}%
+}
+\newcommand\todo[2][todo-\thetodokey]{%todo
+	\addtocounter{todokey}{1}
+	\noindent{%
+		\color{todo}{#2}%
+	}%
+	\phantomsection% comment out if hyperref is not used
+	\linkdest{#1}%
+	\addcontentsline{todo-\thetodosectionlist}{subsubsection}{\textbullet\protect\hyperlink{#1}{#2}\hspace{1mm}}%
+}
+\newcommand\must[2][must-\themustkey]{%must
+	\addtocounter{mustkey}{1}
+	\noindent{%
+		\color{must}{#2}%
+	}%
+	\phantomsection% comment out if hyperref is not used
+	\linkdest{#1}%
+	\addcontentsline{must-\themustsectionlist}{subsubsection}{\textbullet\protect\hyperlink{#1}{#2}}%
 }
 \makeatother
   
 \makeatletter
-\newcommand{\listofkeywordsbasic}{%
-\addtocounter{cherrysublist}{1}
-  \@starttocorig{key-\thecherrysublist}
+\newcommand{\listofkeywordsbasic}{%listofkeyword
+  \@starttocorig{key-\thecherrysectionlist}
 }
+\newcommand{\listoftodosbasic}{%listoftodos
+	\@starttocorig{todo-\thetodosectionlist}
+}
+\newcommand{\listofmustsbasic}{%listofmusts
+	\@starttocorig{must-\themustsectionlist}
+}
+%%frameintoc
+\newcommand\listofframes{\@starttoc{lbf}}
+\newcommand\listofframesname{List of frames}
 \makeatother
-\newcommand\listkeywordsname{KEYWORDS}
+
+\newcommand\listmustsname{MUSTS}%listofmust
+\newcommand\listofmusts{%
+	\listmustsname\phantomsection: \listofmustsbasic}
+\newcommand\listkeywordsname{KEYWORDS}%listofkeyword
 \newcommand\listofkeywords{%
-\subsubsection{\listkeywordsname}\listofkeywordsbasic
+\listkeywordsname\phantomsection: \listofkeywordsbasic}
+\newcommand\listtodosname{TODO}%listoftodo
+\newcommand\listoftodos{%
+\listtodosname\phantomsection: \listoftodosbasic}
+%%frameintoc
+\newcommand\frameintoc{%
+%\subsubsection{\insertframetitle}
+\addcontentsline{lbf}{section}{\protect\makebox[2em][l]{\insertframenumber\hfill}\insertframetitle\par}%
 }
 
 %\def\removespaces{\catcode`\ =9 t e}% Ignore all spaces`
